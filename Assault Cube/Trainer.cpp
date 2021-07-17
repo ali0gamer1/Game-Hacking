@@ -94,10 +94,21 @@ int main()
 
     uintptr_t modulebase = get_module_base_addr(procid, (wchar_t*)"ac_client.exe");
 
+    if (modulebase == 0)
+    {
+
+
+        std::cerr<<"Error: game not running"<<'\n';
+        return 1;
+    }
+
+
     HANDLE hprocess = 0;
     hprocess = OpenProcess(PROCESS_ALL_ACCESS, NULL, procid);
 
     uintptr_t dynamicptr = modulebase + 0x10f4f4;
+
+
 
     std::vector<unsigned int> ammos;
     ammos.push_back(0x374);
